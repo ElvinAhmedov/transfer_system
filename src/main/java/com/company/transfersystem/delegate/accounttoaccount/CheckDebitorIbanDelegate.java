@@ -1,4 +1,4 @@
-package com.company.transfersystem.delegate;
+package com.company.transfersystem.delegate.accounttoaccount;
 
 import com.company.transfersystem.dto.request.TransferRequest;
 import com.company.transfersystem.service.business.AccountBusinessService;

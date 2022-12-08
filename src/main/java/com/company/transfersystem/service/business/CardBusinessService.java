@@ -4,6 +4,8 @@ import com.company.transfersystem.dto.request.CardRequest;
 import com.company.transfersystem.dto.response.CardResponse;
 import com.company.transfersystem.entity.AccountEntity;
 import com.company.transfersystem.entity.CardEntity;
+import com.company.transfersystem.enums.AccountStatusEnum;
+import com.company.transfersystem.enums.CardStatusEnum;
 import com.company.transfersystem.service.functional.AccountFunctionalService;
 import com.company.transfersystem.service.functional.CardFunctionalService;
 import org.springframework.stereotype.Service;
@@ -50,16 +52,25 @@ public class CardBusinessService {
 
     public CardResponse updateCard(Long id, CardRequest request) {
         CardEntity cardEntity = cardFunctionalService.findByIdAndByActiveOrElseNull(id);
-        cardFunctionalService.saveCard(checkCard(cardEntity,request));
+        cardFunctionalService.saveCard(checkCard(cardEntity, request));
         CardResponse response = convertCardToResponse(cardEntity);
 
         return response;
     }
-    public Integer checkCardId(Long id){
+
+    public Integer checkCardId(Long id) {
         if (cardFunctionalService.findByIdAndByActiveOrElseNull(id) == null)
             return 0;
         else
             return 1;
+    }
+
+    public Integer checkStatus(Long id) {
+        CardEntity cardEntity = cardFunctionalService.findByIdAndByActiveOrElseNull(id);
+        if (cardEntity.getStatus() == CardStatusEnum.ACTIVE)
+            return 1;
+        else
+            return 0;
     }
 
     private CardEntity checkCard(CardEntity cardEntity, CardRequest request) {
@@ -88,5 +99,6 @@ public class CardBusinessService {
                 .setId(cardEntity.getId())
                 .setStatus(cardEntity.getStatus());
     }
+
 
 }

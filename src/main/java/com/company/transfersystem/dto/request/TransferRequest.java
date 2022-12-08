@@ -105,4 +105,5 @@ public class TransferRequest implements Serializable {
         this.status = status;
         return this;
     }
+
 }

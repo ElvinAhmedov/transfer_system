@@ -25,7 +25,7 @@ public class TransferController {
     public ResponseEntity<BaseResponse<TransferResponse>> startTransfer(@RequestBody TransferRequest request) {
         TransferResponse transferResponse = camundaUtil
                 .startCamunda(
-                       "account_to_account",
+                       "card_to_card",
                         request, TransferResponse.class);
         return ResponseEntity.ok(BaseResponse.success(transferResponse));
     }
